@@ -1,0 +1,47 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1 (click)="call()">
+    Welcome to {{title}}!!
+  </h1>
+
+</div>
+<button (click)="add()">add 1</button>
+<button (click)="add1()">add 2</button>
+<button (click)="add2()">add 2</button>
+
+
+  <div>
+      <ngx-datatable class="material"
+        [rows]="rows"
+        [columns]="columns">
+      </ngx-datatable>
+    </div>
+
+
+    <ngx-datatable
+        class="material"
+        [rows]="rows"
+        [columns]="columns1"
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="'auto'">
+      </ngx-datatable>
+      <ng-template #hdrTpl let-column="column" >
+        <strong>Fancy</strong>: {{column.name}} !!
+      </ng-template>
+      <ng-template #editTmpl let-row="row" let-value="value">
+     {{value}}
+       
+      </ng-template>
+
+<!-- 
+      <li *ngFor='let col of allColumns'>
+            <input
+              type='checkbox'
+              [id]="col.name"
+              (click)='toggle(col)'
+              [checked]='isChecked(col)'
+            />
+            <label [attr.for]="col.name">{{col.name}}</label>
+          </li> -->
