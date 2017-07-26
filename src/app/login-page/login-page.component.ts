@@ -48,5 +48,5 @@ logout() {
     this.userName = "";
    this.router.navigateByUrl("home-page");
 }
- 
+ /* sample text */
 }
