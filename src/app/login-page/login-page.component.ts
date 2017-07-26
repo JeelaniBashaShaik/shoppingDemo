@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
+import { AuthService } from '../services/auth.service';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { Router } from '@angular/router';
 
-
+import * as firebase from 'firebase/app';
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
@@ -10,16 +14,39 @@ import { Observable } from 'rxjs';
 })
 export class LoginPageComponent implements OnInit {
 
-  constructor(private http: Http) { }
-
-  ngOnInit() {
-
-    this.fetchData().subscribe(data => console.log(data));
+ user: Observable<firebase.User>;
+imageUrl:string;
+userName:string;
+  constructor(public afAuth: AngularFireAuth, public af: AngularFireDatabase, private router:Router) {
+    this.user = this.afAuth.authState;
   }
+ngOnInit() {
+    
+  }
+login() {
+    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+let fireBaseUser = firebase.auth().currentUser;
 
-
-fetchData():Observable<any>{
-  return this.http.get('http://push.cricbuzz.com/match-push?id=18366').map(data => data.json());
-
+this.user.subscribe(data =>{
+  console.log(data);
+  if(data != null){
+ this.imageUrl = data.photoURL;
+ this.userName = data.displayName;
+ console.log('Im in');
+  }
+ 
+  /* this.imageUrl = this.afAuth.auth.currentUser.photoURL; */
+});
 }
+fetch(){
+  console.log(this.afAuth.auth.currentUser);
+  this.imageUrl = this.afAuth.auth.currentUser.photoURL;
+}
+logout() {
+    this.afAuth.auth.signOut();
+    this.imageUrl = "";
+    this.userName = "";
+   this.router.navigateByUrl("home-page");
+}
+ 
 }

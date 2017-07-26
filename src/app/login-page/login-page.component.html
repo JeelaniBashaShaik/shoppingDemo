@@ -2,4 +2,9 @@
   login-page works!
 </p>
 
-
+<button (click)="login()" *ngIf="!(user | async)?.uid">Login</button>
+  
+<div *ngIf="(user | async)?.uid">
+  <button (click)="logout()" >Logout</button>
+  <img src={{imageUrl}}  height="42" width="42">
+  {{userName}}</div>
