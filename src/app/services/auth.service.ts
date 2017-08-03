@@ -7,11 +7,7 @@ export class AuthService {
     user: Observable<firebase.User>;
   private authState: Observable<firebase.User>
   private currentUser: firebase.User = null;
-constructor() {
-   
-  }
-  getAuthState() {
-    return this.authState;
-  }
+constructor() {}
+ 
 
 }

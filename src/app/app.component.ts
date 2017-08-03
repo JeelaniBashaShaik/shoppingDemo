@@ -19,15 +19,7 @@ export class AppComponent implements OnInit{
 
 ngOnInit(){
 
-  //this.columns1.push(this.column2);
 }
-
-
-
-/* sample text */
-
-
-
 
 
 
