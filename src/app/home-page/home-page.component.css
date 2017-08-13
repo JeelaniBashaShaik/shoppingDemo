@@ -1,0 +1,18 @@
+#dept{
+    border: 1.5px solid darkorange !important;
+    padding: 2%;
+    margin: 1%;
+}
+
+.dept1{
+    border: 1.5px solid mediumseagreen;
+    cursor: pointer;
+    text-align: center;
+    padding: 1%;
+    font-size: x-large;
+    margin: 0.5%;
+}
+
+.bc{
+    cursor: pointer;
+}

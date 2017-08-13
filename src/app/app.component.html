@@ -1,3 +1,30 @@
-<button (click)="call()">Btn</button>
 
+<h6 (click)="goToHomePage()" style="cursor:pointer">RJ Shopping Demo</h6>
+
+
+
+
+
+<!--   <nav *ngIf="(user | async)?.uid">
+    <div *ngIf="(user | async)?.uid" class="nav-wrapper">
+    <div class="chip">
+    
+    {{userName}}
+  </div>  -->
+ <!--  {{userName}} -->
+     <!-- <img src={{imageUrl}} style="border-radius:50%;margin-top:1%;margin-left:1%" height="25 !important" width="25 !important"> -->
+      <!-- <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a (click)="logout()">LogOut</a></li>
+        <li><a href="badges.html">Components</a></li>
+      </ul>
+    </div>
+  </nav>
+<button (click)="login()" *ngIf="!(user | async)?.uid">Login</button> -->
 <router-outlet></router-outlet>
+
+
+<!-- <footer class="page-footer">
+          <div class="footer-copyright">
+            © 2017 RJ Shopping Demo 
+          </div>
+        </footer> -->

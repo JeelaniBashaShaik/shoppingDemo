@@ -17,6 +17,7 @@ export class LoginPageComponent implements OnInit {
  user: Observable<firebase.User>;
 imageUrl:string;
 userName:string;
+isLoggedIn:boolean;
   constructor(public afAuth: AngularFireAuth, public af: AngularFireDatabase, private router:Router) {
     this.user = this.afAuth.authState;
   }
@@ -33,6 +34,8 @@ this.user.subscribe(data =>{
  this.imageUrl = data.photoURL;
  this.userName = data.displayName;
  console.log('Im in');
+ this.isLoggedIn = true;
+ this.router.navigateByUrl('home-page');
   }
  
   /* this.imageUrl = this.afAuth.auth.currentUser.photoURL; */
@@ -46,6 +49,7 @@ logout() {
     this.afAuth.auth.signOut();
     this.imageUrl = "";
     this.userName = "";
+    this.isLoggedIn= false;
    this.router.navigateByUrl("home-page");
 }
  /* sample text */

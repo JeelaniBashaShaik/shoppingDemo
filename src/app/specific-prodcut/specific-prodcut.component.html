@@ -1,0 +1,39 @@
+<div class="row">
+        <div class="col s6 m3">
+          <div class="card" >
+            <div class="card-image">
+              <img src={{currentProduct.productImage}}  style="width:350px;height:350px;" >
+            </div>
+            <!-- <div class="card-content">
+              <p>{{currentProduct.productLongDescription}}</p>
+            </div> -->
+            <div class="card-action">
+              <a>{{currentProduct.productBrand}}</a>
+              <div><span class="card-title" style="color:black">{{currentProduct.productName}}</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="col s6">
+          <div class="row">
+          <label class="x1">Description:</label><span style="margin-left:1%">{{currentProduct.productLongDescription}}</span>
+
+        </div>
+        <div class="row">
+          <label class="x1">Features:</label>
+          <ul class="collection">
+            <li *ngFor="let x of currentProduct.productFeatures" class="collection-item">-->{{x}}</li></ul>
+        </div>
+          <div class="row">
+          <label class="x1">Brand:</label><span style="margin-left:1%">{{currentProduct.productBrand}}</span>
+        </div>
+        <div class="row">
+          <label class="x1">Name:</label><span style="margin-left:1%">{{currentProduct.productName}}</span>
+        </div>
+        <div class="row">
+          <label class="x1">Price:</label><span style="margin-left:1%">{{currentProduct.productCurrentPrice}}</span>
+        </div>
+        <div class="row">
+          <label class="x1">Short Desc.,:</label><span style="margin-left:1%">{{currentProduct.productShortDescription}}</span>
+        </div>
+        </div>
+      </div>

@@ -1,16 +1,21 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppRoutingModule }     from './app-routing.module';
 import {HttpModule} from "@angular/http";
+//import { MdlModule } from '@angular-mdl/core';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { AppComponent } from './app.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { AngularFireModule} from 'angularfire2';
 import { AuthService } from './services/auth.service';
+import { FirebaseService } from './services/firebase.service';
+import { ProductService } from './services/product.service';
 
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { SpecificProdcutComponent } from './specific-prodcut/specific-prodcut.component';
+import { BreadCrumbsComponent } from './bread-crumbs/bread-crumbs.component';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyCYozTNiEyOyUKVl_1DLoY9hJPgddlxKVE",
@@ -25,7 +30,9 @@ export const firebaseConfig = {
   declarations: [
     AppComponent,
     LoginPageComponent,
-    HomePageComponent
+    HomePageComponent,
+    SpecificProdcutComponent,
+    BreadCrumbsComponent
   ],
   imports: [
     BrowserModule,NgxDatatableModule,
@@ -33,7 +40,8 @@ export const firebaseConfig = {
     AngularFireDatabaseModule,
     AngularFireAuthModule
   ],
-  providers: [AuthService],
+  providers: [AuthService,FirebaseService,ProductService],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

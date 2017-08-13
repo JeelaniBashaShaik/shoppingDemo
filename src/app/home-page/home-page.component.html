@@ -1,3 +1,64 @@
-<p>
-  home-page works!
-</p>
+ <nav style="background-color:darkorange">
+    <div  class="nav-wrapper">
+      <div class="col s12">
+        <a  class="breadcrumb bc" style="margin-left:1%" (click)="shiftToHome()">Home</a>
+        <a  class="breadcrumb bc" (click)="shiftToDepartment()" *ngIf="isDepartmentSelected">{{currentDepartment}}</a>
+        <a  class="breadcrumb bc" (click)='shiftToCategory()' *ngIf="isCategorySelected">{{currentCategory}}</a>
+        <a  class="breadcrumb bc" (click)='shiftToSubCategory()' *ngIf="issubCategorySelected">{{currentSubCategory}}</a>
+      </div>
+    </div>
+  </nav> 
+  <!-- <app-bread-crumbs></app-bread-crumbs> -->
+<marquee direction = "right" width = "40%"><h6>{{selectText}}</h6></marquee>
+
+<div *ngIf="!isDepartmentSelected">
+  <div class="row" id="dept">
+      <div class="department" class="col s3 dept1" style="width:24.5%"  *ngFor="let x of allDepartmentsList">
+        <div class="animated zoomIn" (click)="selectDepartment($event.target.innerText)">
+          {{x}}
+        </div>
+      </div>
+  </div>
+</div>
+
+<div *ngIf="isDepartmentSelected && !isCategorySelected">
+  <div class="row" id="dept">
+      <div class="category" class="col s3 dept1" style="width:24.5%"  *ngFor="let x of specificCategoriesList">
+        <div class="animated zoomIn" (click)="selectCategory($event.target.innerText)">
+          {{x}}
+        </div>
+      </div>
+  </div>
+</div>
+
+<div *ngIf="!issubCategorySelected && isCategorySelected">
+  <div class="row" id="dept">
+      <div class="category" class="col s3 dept1" style="width:24.5%"  *ngFor="let x of specificSubCategoriesList">
+        <div class="animated zoomIn" (click)="selectSubCategory($event.target.innerText)">
+          {{x}}
+        </div>
+      </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="issubCategorySelected">
+        <div class="col s6 m3" *ngFor="let product of productsToBeDisplayed">
+          <div class="card" >
+            <div class="card-image">
+              <img src={{product.productImage}}  style="width:250px;height:250px;" (click) = "goToSpecificProduct(product)">
+            </div>
+            <div class="card-content">
+              <span class="card-title" style="color:black">{{product.productName}}</span>
+              <p style="color:lightskyblue">{{product.productLongDescription}}</p>
+            </div>
+            <div class="card-action">
+              <a>{{product.productBrand}}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="noProductsFlag">{{noProduct}}</div>
+      <div *ngIf="showRouterOutlet">
+      <router-outlet></router-outlet></div>
+
+  
