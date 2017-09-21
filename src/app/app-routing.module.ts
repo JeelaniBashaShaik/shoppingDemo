@@ -3,17 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomePageComponent } from './home-page/home-page.component';
 import { LoginPageComponent }  from './login-page/login-page.component';
 import { AppComponent } from './app.component';
-import { SpecificProdcutComponent } from './specific-prodcut/specific-prodcut.component';
-
+import { CustomerComponent } from './customer/customer.component';
+import { AuthService} from './services/auth.service';
  
 const routes: Routes = [
-   { path: '',component: HomePageComponent },
+   { path: '',component: LoginPageComponent },
   { path: 'login-page',component: LoginPageComponent },
-  { path: 'home-page',component: HomePageComponent ,
-    children: [
-      { path: 'specific-product',component:SpecificProdcutComponent },
-    ]
-  },
+  { path: 'home-page',component: HomePageComponent,canActivate:[AuthService] },
+    { path: 'customer',component: CustomerComponent,canActivate:[AuthService] },
 ];
  
 @NgModule({

@@ -1,0 +1,266 @@
+
+
+<nav class="nav-extended" style="background-color:darkorange">
+    <div class="nav-wrapper">
+      <a class="brand-logo">Manage Your Details</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a class="noHover" (click)="goToHome()">Home Page</a></li>
+        <li><a class="noHover" (click)="logout()">LogOut</a></li>
+      </ul>
+    </div>
+    <div class="nav-content">
+      <ul class="tabs tabs-transparent" materialize="tabs">
+        <li class="tab"><a href="#test1">Basic Details</a></li>
+        <li class="tab"><a href="#test2">My Cart</a></li>
+        <li class="tab"><a href="#test3">Orders</a></li>
+      <!--   <li class="tab"><a href="#test4">Test 4</a></li> -->
+      </ul>
+    </div>
+  </nav>
+
+
+<div id="test2" class="col s12">
+    <div class="row">
+        <div class="col s5" id="section1">
+    <div class="row"  *ngFor="let product of customerCart">
+
+<div class="col s12 m12" dnd-draggable [dragEnabled]="true" [dragData]="product">
+    <div class="card horizontal">
+      <div class="card-image">
+        <img src={{product.productImage}} height="100" width="100">
+      </div>
+      <div class="card-stacked">
+        <div class="card-content">
+          <h5>{{product.productName}}</h5>
+           Price:&nbsp;{{product.productTotalPrice}}
+        </div>
+        <div class="card-action">
+          <span style="float:right;margin-left:-20%">Quantity:&nbsp;{{product.quantity}}
+          <button style="" class="btn"><i class="material-icons center" (click)="incrementCartCount(product)">keyboard_arrow_up</i></button>
+          <button style="" class="btn"><i class="material-icons center" (click)="decrementCartCount(product)">keyboard_arrow_down</i></button>
+           <button style="" class="btn"><i class="material-icons center" (click)="addToCheckOut(product)">near_me</i></button>
+            <button class="btn"><i class="material-icons center" (click)="deleteFromCart(product)">delete</i></button> </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div></div>
+<div class="col s7" style="border: 1px solid darkorange;margin-top: 1%;height: 550px;">  
+<h5>CheckOut Estimator</h5>
+<div id="calculatorZone" dnd-droppable (onDropSuccess)="transferDataSuccess($event)">
+<!-- <p *ngIf="checkOutProducts.length === 0">Drag n Drop Ur Items Here</p> -->
+
+ <ngx-datatable [rowHeight]="40" #checkout class='material' [columnMode]="'force'" [headerHeight]="30" style="height:250px;border: 1px solid black" [scrollbarH]="true" [rows]="checkOutProducts">
+<ngx-datatable-column name="S.No" prop="count" [width]="20"></ngx-datatable-column>
+<ngx-datatable-column name="Product Id" prop="productId" [width]="60"></ngx-datatable-column>
+<ngx-datatable-column name="Product Name" prop="productName" [width]="60"></ngx-datatable-column>
+<ngx-datatable-column name="Unit Price" prop="productUnitPrice" [width]="60"></ngx-datatable-column>
+<ngx-datatable-column name="Quantity" prop="quantity"[width]="60">
+  <ng-template ngx-datatable-cell-template let-row="row" let-value="value" let-column="column">
+    <!-- <span><button (click)="increment(column.prop,row.$$index)">+</button>{{value}}<button (click)="decrement(column.prop,row.$$index)">-</button></span> -->
+    <span title="double click to edit" (dblclick)="editing[row.$$index] = true" *ngIf="!editing[row.$$index]">{{value}}</span>
+
+<input autofocus (blur)="updateValue($event,row.$$index)" *ngIf="editing[row.$$index]" type="text" [value]="value"/>
+  </ng-template>
+</ngx-datatable-column>
+<ngx-datatable-column name="Total Price" prop="productTotalPrice" [width]="60"></ngx-datatable-column>
+<ngx-datatable-column [width]="60">
+  <ng-template ngx-datatable-cell-template let-row="row" let-value="value" let-column="column">
+    <!-- <span><button (click)="increment(column.prop,row.$$index)">+</button>{{value}}<button (click)="decrement(column.prop,row.$$index)">-</button></span> -->
+    <!-- <span title="double click to edit"><button class="btn" (click)="removeItem(row.$$index)"><i class="material-icons center">delete</i></button></span> -->
+    <span title="double click to edit"><i (click)="removeItem(row.$$index)" class="material-icons center">delete</i></span>
+
+
+  </ng-template>
+</ngx-datatable-column>
+</ngx-datatable> 
+
+</div>
+<div class="row">
+  <div class="col s3" id="shippingLabel">
+  <h6 style="    border-bottom: 1px solid black;
+    padding-bottom: 3%;">Shipping Label:</h6>
+      <div class="row" style="margin-bottom:-2%"><label style="color:black">{{customerToUpdate.displayName}}</label></div>
+      <div class="row" style="margin-bottom:-2%"> <label style="color:black">{{address.flat_HouseNo}}</label></div>
+      <div class="row" style="margin-bottom:-2%"> <label style="color:black">{{address.street}}</label></div>
+      <div class="row" style="margin-bottom:-2%"> <label style="color:black">{{address.city}}</label></div>
+      <div class="row" style="margin-bottom:-2%"> <label style="color:black">{{address.pincode}}</label></div>
+      <div class="row" style="margin-bottom:-2%"> <label style="color:black">{{address.state}}</label></div>
+      <div class="row" style="margin-bottom:-2%"> <label style="color:black">Phone:{{customerToUpdate.phoneNumber}}</label></div>
+  </div>
+<div class="col s4" id="customBill">
+<!-- <p>Total No. Of Unique Products:&nbsp;{{checkOutProducts.length}} </p> -->
+<p style="    padding: 0;
+    margin-top: 5%;
+    margin-bottom: -5%;">Total Quantity Of Products: &nbsp;{{totalCheckoutCartCount}}</p>
+<p>Total Price: &nbsp;{{totalOrderCost}}</p>
+</div>  
+</div>
+</div>
+</div></div>
+  <div id="test1" class="col s12">
+   <!--  <input type="text" [(ngModel)]="customer.fullName" placeholder="Full Name"> -->
+     <!--  <input id="changedValue" type="text" name="changedValue" [(ngModel)]="customer.fullName" class="validate">  -->
+      <div class = "row">
+          <!--  <div class="col s2">
+              <img src="{{photoUrl}}" height="150" width="150" style="margin-top:1%">
+          </div>  -->
+          <!-- <div class="input-field col s2">
+           <i class="material-icons prefix">account_circle</i>
+           <input id="icon_prefix" type="text" disabled [(ngModel)]="customerToUpdate.displayName">
+           <i class="material-icons prefix">email</i>
+           <input id="icon_prefix" type="text" disabled [(ngModel)]="customerToUpdate.email">
+          <i class="material-icons prefix">phone</i>
+          <input id="icon_telephone" type="tel" [(ngModel)]="customerToUpdate.phoneNumber" class="validate"> -->
+            <div class="row">
+          <div class="input-field col s3" style="height:22px">
+                <i class="material-icons prefix">account_circle</i> 
+                <input type="text" disabled [(ngModel)]="customerToUpdate.displayName" class="validate">
+          </div>
+          </div>
+          <div class="row">
+          <div class="input-field col s3" style="height:22px">
+                <i class="material-icons prefix">email</i> 
+                <input type="text" disabled [(ngModel)]="customerToUpdate.email" class="validate">
+          </div></div>
+  <div class="row">
+          <div class="input-field col s3" style="height:22px">
+                <i class="material-icons prefix">phone</i> 
+                <input type="text" [(ngModel)]="customerToUpdate.phoneNumber" class="validate">
+          </div></div>
+
+          
+            <!-- <input type="text" class="datepicker" materialize="pickadate"> -->
+           
+      <!--   </div> -->
+        <div  *ngIf="noGenderFlag" class="col s4">
+
+        <p>
+        <input class="with-gap" name="group3" type="radio" id="male" (click)="setGender('male')" />
+    <label for="male">Male</label>
+  </p>
+
+  <p>
+    <input class="with-gap" name="group3" type="radio" id="female" (click)="setGender('female')"/>
+    <label for="female">Female</label>
+  </p>
+
+   <p>
+    <input class="with-gap" name="group3" type="radio" id="transGender" (click)="setGender('transGender')"/>
+    <label for="transGender">TransGender</label>
+  </p>
+
+
+        </div>
+       <!--  <div class="col s2" *ngIf="!noAddressFlag">
+            Shipping Address:
+            <div class="row" style="margin-bottom:-1%">
+            <label>{{customerToUpdate.displayName}}</label></div>
+         <div class="row" style="margin-bottom:-1%">   <label>{{address.flat_HouseNo}}</label></div>
+          <div class="row" style="margin-bottom:-1%">  <label>{{address.street}}</label></div>
+         <div class="row" style="margin-bottom:-1%">   <label>{{address.city}}</label></div>
+         <div class="row" style="margin-bottom:-1%">   <label>{{address.pincode}}</label></div>
+         <div class="row" style="margin-bottom:-1%">   <label>{{address.state}}</label></div>
+         <div class="row" style="margin-bottom:-1%">   <label>Phone:{{customerToUpdate.phoneNumber}}</label></div>
+        </div> -->
+      </div>
+    <div clas="row">
+        <div class="col s5" *ngIf="!noAddressFlag">
+              <div class="row">
+                  <div class="input-field col s3" style="height:22px">
+                    <i class="material-icons prefix">home</i>
+                    <input id="icon_home" type="text" [(ngModel)]="address.flat_HouseNo" class="validate">
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="input-field col s3" style="height:22px">
+                    <i class="material-icons prefix">transfer_within_a_station</i>
+                    <input id="street" type="text" [(ngModel)]="address.street" class="validate">
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="input-field col s3" style="height:22px">
+                    <i class="material-icons prefix">location_city</i>
+                    <input id="icon_city" type="text" [(ngModel)]="address.city" class="validate">
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="input-field col s3" style="height:22px">
+                    <i class="material-icons prefix">fiber_pin</i>
+                    <input id="icon_code" type="text" [(ngModel)]="address.pincode" class="validate">
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="input-field col s3" style="height:22px">
+                    <i class="material-icons prefix">explore</i>
+                    <input id="icon_state" type="text" [(ngModel)]="address.state" class="validate">
+                  </div>
+              </div>
+
+                </div>
+             </div>
+             <div class="row">
+            <div *ngIf="noAddressFlag else showAvailableAddresses"><p style="margin-left:2%">It seems you have not added any address yet. Go Ahead, add an Address</p>
+             <div class="row">
+
+
+                <div class="input-field col s2">
+                    <i class="material-icons prefix">home</i> 
+                    <input type="text" [(ngModel)]="address.flat_HouseNo" placeholder="Flat/House #" class="validate">
+                </div>
+                <div class="input-field col s2">
+                    <i class="material-icons prefix">transfer_within_a_station</i> 
+                    <input type="text" [(ngModel)]="address.street" placeholder="Street" class="validate">
+                </div>
+                <div class="input-field col s2">
+                    <i class="material-icons prefix">location_city</i> 
+                    <input type="text" [(ngModel)]="address.city" placeholder="City" class="validate">
+                </div>
+                <div class="input-field col s2">
+                    <i class="material-icons prefix">fiber_pin</i> 
+                    <input type="text" [(ngModel)]="address.pincode" placeholder="Pincode" class="validate">
+                </div>
+                <div class="input-field col s2">
+                    <i class="material-icons prefix">explore</i> 
+                    <input type="text" [(ngModel)]="address.state" placeholder="State" class="validate">
+                </div>
+
+                
+             </div>             
+            </div>
+        <a class="waves-effect waves-light btn" (click)="updateCustomer()"><i class="material-icons right">update</i>Update</a>
+          </div>
+      </div>
+       
+
+
+  <div id="test3" class="col s12">
+      <!-- <div class="row">
+          <div class="col s6 m3" *ngFor="let product of customerCart">
+            <div class="card" style="overflow: visible;">
+              <div class="card-image waves-effect waves-block waves-light">
+                <img class="activator" style="width:250px;height:250px;" src={{product.productImage}}>
+              </div>
+              <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">{{product.productName}}<i class="material-icons right">more_vert</i></span>
+
+              </div>
+              <div class="card-reveal" style="display: none; transform: translateY(0px);">
+                <span class="card-title grey-text text-darken-4">{{product.productName}}<i class="material-icons right">close</i></span>
+                <p>{{product.productLongDescription}}</p>
+              </div>
+
+              <div class="card-action">
+              <span><span class="card-title activator green-text text-darken-4">{{product.productCurrentPrice}}</span><button style="margin-left:25%" (click)="addToCart(product,product.productInCarts)" class="waves-effect waves-light btn"><i class="material-icons center">add_shopping_cart</i></button>
+                <button (click)="addToWishList()" class="waves-effect waves-light btn"><i class="material-icons center">favorite</i></button></span>
+               
+              </div>
+            </div>
+          </div>
+      </div> -->
+  </div>
+  
+
+
+  

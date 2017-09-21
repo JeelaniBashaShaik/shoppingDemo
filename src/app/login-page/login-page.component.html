@@ -1,22 +1,16 @@
 
 <button mdl-button mdl-button-type="raised" mdl-ripple (click)="login()" *ngIf="!(user | async)?.uid">Login</button>
   
-<!-- <button mdl-button mdl-button-type="raised" mdl-ripple>
-    Button
-  </button> -->
-  
-  <!-- sample text -->
+
 
   <nav *ngIf="(user | async)?.uid">
     <div class="nav-wrapper">
        <div class="chip" style="width:12%">
-    <!--  <img src={{imageUrl}} style="border-radius:50%;margin-top:1%;margin-left:1%" height="25 !important" width="25 !important"> -->
     {{userName}}
   </div>
-<!--   {{userName}} -->
     
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a (click)="logout()">LogOut</a></li>
+        <li></li>
         <li><a href="badges.html">Components</a></li>
       </ul>
     </div>

@@ -1,64 +1,231 @@
- <nav style="background-color:darkorange">
-    <div  class="nav-wrapper">
-      <div class="col s12">
-        <a  class="breadcrumb bc" style="margin-left:1%" (click)="shiftToHome()">Home</a>
-        <a  class="breadcrumb bc" (click)="shiftToDepartment()" *ngIf="isDepartmentSelected">{{currentDepartment}}</a>
-        <a  class="breadcrumb bc" (click)='shiftToCategory()' *ngIf="isCategorySelected">{{currentCategory}}</a>
-        <a  class="breadcrumb bc" (click)='shiftToSubCategory()' *ngIf="issubCategorySelected">{{currentSubCategory}}</a>
+<!-- <nav style="background-color:darkorange">
+  <div class="nav-wrapper">
+    <div class="col s12">
+      <a class="breadcrumb bc" style="margin-left:1%" (click)="shiftToHome()">Home</a>
+      <a class="breadcrumb bc" (click)="shiftToDepartment()" *ngIf="isDepartmentSelected">{{currentDepartment}}</a>
+      <a class="breadcrumb bc" (click)='shiftToCategory()' *ngIf="isCategorySelected">{{currentCategory}}</a>
+      <a class="breadcrumb bc" (click)='shiftToSubCategory()' *ngIf="issubCategorySelected">{{currentSubCategory}}</a>
+      <a class="breadcrumb bc" *ngIf="showRouterOutlet">{{currentProduct.productName}}</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down"> -->
+      <!--   <div class="chip">
+    <img src="{{photoUrl}}">
+    {{userName}}
+  </div> -->
+ <!--  <li (click)="goToCustomer()">Manage Account</li>
+        <li><a (click)="logout()">LogOut</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+ -->
+
+<nav class="nav-extended" style="background-color:darkorange">
+    <div class="nav-wrapper">
+      <a class="brand-logo">RJShopping Demo</a>
+       <a data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a (click)="goToCustomer()">Manage Account</a></li>
+        <li><a (click)="logout()">LogOut</a></li>
+      </ul>
+      <ul class="side-nav" id="mobile-demo">
+        <li><a (click)="goToCustomer()">Manage Account</a></li>
+        <li><a (click)="logout()">LogOut</a></li>
+      </ul>
+    </div>
+    <div class="nav-content">
+        <div class="col s12">
+      <a class="breadcrumb bc" style="margin-left:1%" (click)="shiftToHome()">Home</a>
+      <a class="breadcrumb bc" (click)="shiftToDepartment()" *ngIf="isDepartmentSelected">{{currentDepartment}}</a>
+      <a class="breadcrumb bc" (click)='shiftToCategory()' *ngIf="isCategorySelected">{{currentCategory}}</a>
+      <a class="breadcrumb bc" (click)='shiftToSubCategory()' *ngIf="issubCategorySelected">{{currentSubCategory}}</a>
+      <a class="breadcrumb bc" *ngIf="showRouterOutlet">{{currentProduct.productName}}</a>
+        </div>
+    </div>
+  </nav>
+  <div id="todaysDeals" *ngIf="todaysDealsFlag">
+    <a style="margin-left:2%;font-size:25px;color:darkorange">Todays Deals:&nbsp;</a><a id="demo" style="font-size:23px;color:black"></a>
+<div class="carousel" >
+     <!-- <a class="carousel-item" ><img src={{todaysDeals[0].productImage}} style="border: 1px solid darkorange;padding:3%;" height="250" width="100"></a>
+    <a class="carousel-item" ><img src={{todaysDeals[1].productImage}} style="border: 1px solid darkorange;padding:3%;" height="250" width="100"></a>
+    <a class="carousel-item" ><img src={{todaysDeals[2].productImage}} style="border: 1px solid darkorange;padding:3%;" height="250" width="100"></a>
+    <a class="carousel-item" ><img src={{todaysDeals[3].productImage}} style="border: 1px solid darkorange;padding:3%;" height="250" width="100"></a>
+    <a class="carousel-item" ><img src={{todaysDeals[4].productImage}} style="border: 1px solid darkorange;padding:3%;" height="250" width="100"></a> --> 
+     <a class="carousel-item" style="display:block" *ngFor="let product of todaysDeals" ><img src={{product.productImage}} style="border: 1px solid darkorange;padding:3%;" height="250" width="100"></a> 
+
+  </div></div>
+
+ <!--  <div class="wrapper">
+   <div id="imageBlock">
+        <div id='container'>
+        </div>
+    </div>
+</div> -->
+<marquee direction="right" width="40%">
+  <h6>{{selectText}}</h6>
+</marquee>
+
+
+
+
+
+<div *ngIf="!isDepartmentSelected && !isCategorySelected && !issubCategorySelected">
+  <div class="row" id="dept">
+    <div class="department" class="col s3 dept1" style="width:24.5%;height:5%" *ngFor="let x of allDepartmentsList">
+      <div class="animated fadeIn" (click)="selectDepartment($event.target.innerText)">
+        {{x}}
       </div>
     </div>
-  </nav> 
-  <!-- <app-bread-crumbs></app-bread-crumbs> -->
-<marquee direction = "right" width = "40%"><h6>{{selectText}}</h6></marquee>
-
-<div *ngIf="!isDepartmentSelected">
-  <div class="row" id="dept">
-      <div class="department" class="col s3 dept1" style="width:24.5%"  *ngFor="let x of allDepartmentsList">
-        <div class="animated zoomIn" (click)="selectDepartment($event.target.innerText)">
-          {{x}}
-        </div>
-      </div>
   </div>
+    
 </div>
 
 <div *ngIf="isDepartmentSelected && !isCategorySelected">
   <div class="row" id="dept">
-      <div class="category" class="col s3 dept1" style="width:24.5%"  *ngFor="let x of specificCategoriesList">
-        <div class="animated zoomIn" (click)="selectCategory($event.target.innerText)">
-          {{x}}
-        </div>
+    <div class="category" class="col s3 dept1" style="width:24.5%;height:5%" *ngFor="let x of specificCategoriesList">
+      <div class="animated fadeIn" (click)="selectCategory($event.target.innerText)">
+        {{x}}
       </div>
+    </div>
   </div>
 </div>
 
 <div *ngIf="!issubCategorySelected && isCategorySelected">
   <div class="row" id="dept">
-      <div class="category" class="col s3 dept1" style="width:24.5%"  *ngFor="let x of specificSubCategoriesList">
-        <div class="animated zoomIn" (click)="selectSubCategory($event.target.innerText)">
-          {{x}}
-        </div>
+    <div class="category" class="col s3 dept1" style="width:24.5%;height:5%" *ngFor="let x of specificSubCategoriesList">
+      <div class="animated fadeIn" (click)="selectSubCategory($event.target.innerText)">
+        {{x}}
       </div>
+    </div>
   </div>
 </div>
 
-<div class="row" *ngIf="issubCategorySelected">
-        <div class="col s6 m3" *ngFor="let product of productsToBeDisplayed">
-          <div class="card" >
-            <div class="card-image">
-              <img src={{product.productImage}}  style="width:250px;height:250px;" (click) = "goToSpecificProduct(product)">
+<div class="row" *ngIf="displayAllProductsFlag">
+  
+  <div class="col s9">
+    <div class="row">
+      <div class="col s6 m3" *ngFor="let product of productsToBeDisplayed" dnd-draggable [dragEnabled]="true" [dragData]="product">
+            <div class="card" style="overflow: visible;" >
+              <div class="card-image waves-block" (click)="goToSpecificProduct(product)">
+                <img class="activator" style="width:250px;height:250px;" src={{product.productImage}}>
+              </div>
+              <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">{{product.productName}}<i class="material-icons right">more_vert</i></span>
+
+              </div>
+               <div class="card-reveal" style="display: none; transform: translateY(0px);">
+                <span class="card-title grey-text text-darken-4">{{product.productName}}<i class="material-icons right">close</i></span>
+                <p>{{product.productLongDescription}}</p>
+              </div> 
+
+              <div class="card-action">
+              <span><span class="card-title activator green-text text-darken-4">{{product.productCurrentPrice}}</span><button style="float:right" (click)="addToCart(product,product.productInCarts)" class="waves-effect waves-light btn"><i class="material-icons center">add_shopping_cart</i></button></span>
+                <!-- <a href="#">This is a link</a>favorite -->
+              </div>
             </div>
-            <div class="card-content">
-              <span class="card-title" style="color:black">{{product.productName}}</span>
-              <p style="color:lightskyblue">{{product.productLongDescription}}</p>
-            </div>
-            <div class="card-action">
-              <a>{{product.productBrand}}</a>
-            </div>
+      </div>
+    </div>
           </div>
+          <!-- <div class="col s2"></div> -->
+<div class="col s3" dnd-droppable (onDropSuccess)="transferDataSuccess($event)" style="
+    border: 1px solid darkorange;
+    height: 580px;
+    margin-left: -1%;
+    padding: 1%;overflow-y:auto" >
+   <div class="row" style="min-height:500px"><p style="    border-bottom: 1px solid black;
+    margin-top: -3%;
+    text-align: start;">My Cart</p>
+    <div class="col s12 m12" >
+    <div class="card horizontal" *ngFor="let product of customerCart">
+      <div class="card-image">
+        <img src={{product.productImage}} height="75" width="75">
+      </div>
+      <div class="card-stacked">
+        <div class="card-content" style="height:0px">
+          <span><p>{{product.productBrand}} <span class="WebRupee" style="color:black !important">&#x20B9;</span>:{{product.productTotalPrice}}&nbsp;/-</p></span>
+        </div>
+        <div class="card-action" style="margin-bottom:-7%">
+          <span style="margin-left:-14px">Quantity:&nbsp;{{product.quantity}}</span>
+          
+         <span style="float:right;margin-top:-6%"> <i style="border: 1px solid black;margin-left:-14%;
+    cursor: pointer;" class="material-icons center" (click)="incrementCount(product)">keyboard_arrow_up</i><i style="border: 1px solid black;
+    cursor: pointer;margin-left:7%" class="material-icons center" (click)="decrementCount(product)">keyboard_arrow_down</i><i class="material-icons center" style="border:1px solid black;margin-left:7%" (click)=deleteFromCart(product) >delete</i></span>
         </div>
       </div>
-      <div *ngIf="noProductsFlag">{{noProduct}}</div>
-      <div *ngIf="showRouterOutlet">
-      <router-outlet></router-outlet></div>
+    </div>
+  </div>
+  </div> 
+<div class="col s12 m12">
+    <div class="card horizontal" style="   position: absolute;
+    bottom: 16px;
+    width: 25%;
+    color: white;
+    margin-left: -1.87%;
+    background-color: darkorange;
+    height: 35px;">
+      <div class="card-stacked">
+        <p style="    margin-left: 27%;
+    margin-top: 2%;">Total Price:&nbsp;<span class="WebRupee" style="color:white !important">&#x20B9;</span>:<span id="totalMoney">{{totalCartPrice}}&nbsp;/-</span></p>
+    
+      </div>
+    </div>
+  </div>
+<!-- <div class="row" style="    position: absolute;
+    border: 1px solid black;
+    bottom: 33px;
+    width: 23%;">Total Price:&nbsp;<span class="WebRupee" style="color:black !important">&#x20B9;</span>:<span id="totalMoney">{{totalCartPrice}}&nbsp;/-</span></div> -->
+</div>
 
+</div>
+<div *ngIf="noProductsFlag">{{noProduct}}</div>
+
+<div class="row" *ngIf="showRouterOutlet">
+  <div class="col s6 m3" >
   
+     <div class="card">
+      <div class="card-image">
+           <div class="wrapper">
+              <div id="imageBlock">
+                <div id='container' style="height:350px;width:350px" on-mouseover="bigImg()" on-mouseout="normalImg()">
+                </div>
+              </div>
+            </div>
+        <!-- <img id="imageContainer" src={{currentProduct.productImage}} style="width:350px;height:350px;"> -->
+      </div>
+      <div class="card-action">
+        <a>{{currentProduct.productBrand}}</a>
+        <div><span class="card-title" style="color:black">{{currentProduct.productName}}</span></div>
+      </div>
+    </div> 
+    <button style="float:right" (click)="addToCart(currentProduct,currentProduct.productInCarts)" class="waves-effect waves-light btn"><i class="material-icons right">add_shopping_cart</i>Add To Cart</button>
+  </div>
+  <div class="col s6" style="margin-left: 3%;" *ngIf="!imageHoverFlag">
+     <div class="row">
+      <label class="x1">Name:</label><span style="margin-left:1%">{{currentProduct.productName}}</span>
+    </div>
+    <div class="row">
+      <label class="x1">Brand:</label><span style="margin-left:1%">{{currentProduct.productBrand}}</span>
+    </div>
+    <div class="row">
+      <label class="x1">Price:</label><span style="margin-left:1%">{{currentProduct.productCurrentPrice}}&nbsp;/-</span>
+    </div>
+    <div class="row">
+      <label class="x1">Short Desc.,:</label><span style="margin-left:1%">{{currentProduct.productShortDescription}}</span>
+    </div>
+    <div class="row">
+      <label class="x1">Features:</label>
+      <ul class="collection">
+        <li *ngFor="let x of currentProduct.productFeatures" class="collection-item">{{x}}</li>
+      </ul>
+    </div>
+    <div class="row">
+      <label class="x1">Description:</label><span style="margin-left:1%">{{currentProduct.productLongDescription}}</span>
+    </div>
+    
+    
+   
+    
+    
+  </div>
+</div>
+
+

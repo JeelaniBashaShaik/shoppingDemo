@@ -2,20 +2,20 @@ import { ProductRating } from './productRating';
 
 export class Product{
     productId:string;
-    productImage:String;
-    productCurrentPrice:Number;
-    productShortDescription:String;
-    productLongDescription:String;
-    productCategory:String;
-    productViews:Number;
-    timeSpentViewing:Number;
-    productWishes:Number;
-    productFeatures:Array<String>=[];
-    productBrand:String;
-    productPriceArray:Array<Number>=[];
-    productComments:Array<String>=[];
+    productImage:string;
+    productCurrentPrice:number;
+    productShortDescription:string;
+    productLongDescription:string;
+    productCategory:string;
+    productViews:number;
+    timeSpentViewing:number;
+    productWishes:number;
+    productFeatures:Array<string>=[];
+    productBrand:string;
+    productPriceArray:Array<number>=[];
+    productComments:Array<string>=[];
     productRating:ProductRating;
-    productInCarts:number;
+    productInCarts:number=0;
     productInWishLists:number=0;
 
 }

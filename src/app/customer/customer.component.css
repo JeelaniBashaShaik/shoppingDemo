@@ -1,0 +1,59 @@
+.noHover:hover{
+background-color: darkorange;
+cursor: pointer;
+font-size: 120%;
+}
+
+.items{
+    border: 1.5px solid darkorange;
+    padding: 1%;
+    margin: 1%;
+}
+
+.count{
+        display: inline;
+    padding-left: 7%;
+    padding-right: 2%;
+    border: 1px solid black;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+#section1{
+          overflow-y: scroll;
+    /* padding: 1%; */
+    height: 550px;
+    border: 1px solid darkorange;
+     margin-top: 1%;   
+     border-right: none;
+}
+
+#section2{
+         overflow-y: scroll;
+    padding: 1%;
+    height: 500px;
+    border: 1px solid darkorange;
+    margin: 1%; 
+}
+
+#shippingLabel{
+    padding: 1%;
+    border: 1px solid black;
+    margin-top: 1.5%;
+}
+
+#customBill{
+    border: 1px solid black;
+    margin-left: 1.5%;
+    margin-top: 1.5%;
+}
+
+.datatable-header.datatable-header-cell.sortable.resizeable{
+      background-color: red !important;
+    }
+    
+
+    .ngx-datatable.material.datatable-body.datatable-body-row.datatable-body-cell{
+        background-color: red;
+
+    }
